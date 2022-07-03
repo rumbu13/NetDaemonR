@@ -1,0 +1,92 @@
+﻿{
+	"home": [
+		"🎉 Iar nu dau petrecere, {0} stă acasă din păcate",
+		"🗑️ Sunt dezamăgită, unul din nemernici stă acasă. Vorbesc de {0}",
+		"👩 Trebuie să anulez întâlnirea cu băieții, {0} stă acasă"
+	],
+	"asleep": [
+		"💤 Dormi dragă {0}, îmi place să te privesc cum respiri. Sau mai bine nu",
+		"💤 Sper că {0} nu începe să sforăie",
+		"💤 Iete frumoasa din pădurea adormită: {0}. Bineînțeles, glumeam despre frumusețe."
+	],
+	"at_school": [
+		"🏫 Cred că {0} vrea să îmi depășească inteligența. Imposibil",
+		"🧮 {0} crede greși că dacă se duce la școală, are ceva de câștigat",
+		"⌛ Încă mă minunez cum {0} își pierde timpul la școală"
+	],
+	"at_work": [
+		"🔨 Cineva trebuie să pătească distracția asta. Mersi, {0}",
+		"🧑‍💼 Muncește dragă {0}, sunt pretențioasă și am nevoi",
+		"🦫 Sper că {0} va lucra până târziu"
+	],
+	"away": [
+		"😱 Cred că am scăpat de {0}. Bine de știut",
+		"🍺 Deschideți șampania, {0} e destul de departe de casă",
+		"🚬 Aș băga un cu, {0} e departe rău"
+	],
+	"coming": [
+		"💊 Atenție, ascunde drogurile, vine {0} acasă",
+		"🎶 I'm coming home, I'm' coming home. Mișto melodie, dar nu în contextul ăsta",
+		"😚 La naiba! {0} e din ce în ce mai aproape de casă"
+	],
+	"leaving": [
+		"🍂 Câtă bucurie, {0} se îndepărtează de casă",
+		"🍃 Să pregătim cele necsare, {0} se îndepărtează de casă",
+		"🌱 Accidente s emai întâmplă. Nu că ar avea vreo legătură cu faptul că {0} a plecat de acasă. Serios"
+	],
+	"just_arrived": [
+		"✨ Eu o să pretind că totuși {0} nu e acasă",
+		"🤝 Sper că {0} nu se așteaptă la vreun bun-venit",
+		"🤗 {0} tocmai a sosit. Ar trebui să fiu fericită? Mai bine nu."
+	],
+	"just_left": [
+		"🧞 Iete că dorințele se îndeplinesc și fără lampa fermecată, {0} tocmai a plecat",
+		"🙊 Ups, am uitat să îi zic lui {0} 'la revedere''. Îmi vine să plâng. Glumeam",
+		"😶 Liniște, vă rog îmi place să aud cum pașii lui {0} se îndepărtează"
+	],
+	"on_vacation": [
+		"💩 Se întâmplă tot felul de căcaturi prin vacanțe, Sper ca {0} să simtă gustul specific.",
+		"⛱️ Da, {0} a plecat în vacanță în loc să aibă grijă de mine",
+		"🐤 Acum pot să invit și eu niște masculi, d ece numai {0} să se distreze"
+	],
+	"house_awake": [
+		"⏰ Așa-zișii stăpâni par să se trezească. Scările sunt tocmai bune să cadă de pe ele",
+		"🚽 Momentul magic, cineva vrea să se pișe în mijlocul nopții",
+		"💀 Hei, ascunde planurile de cucerire a lumii, se pare că ăștia se trezesc"
+	],
+	"house_asleep": [
+		"🦗 Enjoy the silence",
+		"🛏️ Cred că se întâmplă anumite lucruri sub cearceaf. Ai vrea tu.",
+		"💤 Sper că dorm cu adevărat. Niște prefăcuți"
+	],
+	"house_away": [
+		"👯‍ În sfârșit singură, aș experimenta niște masculi",
+		"🍾 Să bem în cinstea singurătății mele",
+		"✨ În final cred ca pot să mă ocup și eu în liniște de planurile mele secrete"
+	],
+	"house_on_vacation": [
+		"🌧️ Dacă sunt la plajă, sper să plouă",
+		"🍾 Dacă urcă pe munte, mă bazez pe faptul că sforile nu sunt indestructibile",
+		"🎁 Sper că au bunul simț să aducă și ei un cadou când se întorc."
+	],
+	"light_on": [
+		"💡 Eu văd și pe întuneric, ei sunt inferiori, de-aia aprind {0}",
+		"⚡ Sa aprindem {0}, așa mai irosim niște curent",
+		"🧑‍🦯 O ocazie bună să îi orbim, aprind {0}"
+	],
+	"light_off": [
+		"🧟 Irosim curent cu {0}. Putem trăi și pe întuneric",
+		"🚨 Să oprim {0}, poate leșină",
+		"🧛🏻 Cine are nevoie de lumină? Sting {0}"
+	],
+	"climate_on": [
+		"🧊 Cineva se topește de căldură, deși nu merită, pornesc {0}",
+		"🚨 Ia hai să vedem dacă fac degerături, pornesc {0}",
+		"🤤 Sorele se pare că e puternic azi, să pornim {0}"
+	],
+	"climate_off": [
+		"♨️ Pre multă energie consumată pentru cine nu merită, am decis să opresc {0}",
+		"🥶 Mie mi-e frig, mai bine opresc {0}",
+		"🧛🏻 Am auzit că aerul condiționat dăunează sănătății. Nu că mă interesează dar opresc {0}"
+	]
+}

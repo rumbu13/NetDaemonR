@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetDaemonApps", "NetDaemonApps\NetDaemonApps.csproj", "{E70527EA-D059-4C02-9A5A-CC9357E12108}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetDaemon.Extensions.HassClient", "NetDaemon.Extensions.HassClient\NetDaemon.Extensions.HassClient.csproj", "{7667917B-5E95-4BF5-ABB8-7554DD776201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetDaemon.Extensions.HassManager", "NetDaemon.Extensions.HassManager\NetDaemon.Extensions.HassManager.csproj", "{0EF5D0CE-3D56-4161-BBAC-D0455A9B655E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E70527EA-D059-4C02-9A5A-CC9357E12108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E70527EA-D059-4C02-9A5A-CC9357E12108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E70527EA-D059-4C02-9A5A-CC9357E12108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E70527EA-D059-4C02-9A5A-CC9357E12108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7667917B-5E95-4BF5-ABB8-7554DD776201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7667917B-5E95-4BF5-ABB8-7554DD776201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7667917B-5E95-4BF5-ABB8-7554DD776201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7667917B-5E95-4BF5-ABB8-7554DD776201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF5D0CE-3D56-4161-BBAC-D0455A9B655E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF5D0CE-3D56-4161-BBAC-D0455A9B655E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF5D0CE-3D56-4161-BBAC-D0455A9B655E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF5D0CE-3D56-4161-BBAC-D0455A9B655E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F76E2A8-A21A-4FDE-B045-F10C1F8004AD}
+	EndGlobalSection
+EndGlobal
