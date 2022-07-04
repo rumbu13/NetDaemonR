@@ -25,7 +25,7 @@ internal record HassTokenCreate: HassCommand
     }
 
     [JsonPropertyName("lifespan")]
-    [JsonConverter(typeof(TimeSpanDaysJsonConverter))]
+    [JsonConverter(typeof(JsonTimeSpanDaysConverter))]
     public TimeSpan LifeSpan { get; init; }
 
     [JsonPropertyName("client_name")]
@@ -68,7 +68,7 @@ internal record HassSignPath : HassCommand
     public string? Path { get; init; }
 
     [JsonPropertyName("expires")]
-    [JsonConverter(typeof(TimeSpanSecondsJsonConverter))]
+    [JsonConverter(typeof(JsonTimeSpanSecondsConverter))]
     public TimeSpan? Expires { get; init; }
 }
 

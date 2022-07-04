@@ -664,6 +664,131 @@ public static class IHomeAssistantConnectionExtensions
 
     #endregion
 
+    #region Device
+
+    /// <summary>
+    /// Gets a list of devices
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyCollection<Models.HassDevice>?> GetDevicesAsync(this IHomeAssistantConnection connection,
+       CancellationToken cancellationToken = default)
+
+       => connection.SendCommandAndReturnResponseAsync<HassDeviceList, IReadOnlyCollection<Models.HassDevice>>(
+           new HassDeviceList(), cancellationToken);
+
+    /// <summary>
+    /// Updates the specified device
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="areaId"></param>
+    /// <param name="nameByUser"></param>
+    /// <param name="disabledBy"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<Models.HassDevice?> UpdateDeviceAsync(this IHomeAssistantConnection connection, string id, 
+        string? areaId = default, string? nameByUser = default, string? disabledBy = default,
+        CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceUpdate, Models.HassDevice>(
+            new HassDeviceUpdate(id, areaId, nameByUser, disabledBy), cancellationToken);
+
+    /// <summary>
+    /// Removes a configuration entry from the specified device
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="configEntryId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<Models.HassDevice?> DeleteDeviceConfiguration(this IHomeAssistantConnection connection, string id,
+        string configEntryId, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceRemoveConfig, Models.HassDevice>(
+            new HassDeviceRemoveConfig(id, configEntryId), cancellationToken);
+
+    /// <summary>
+    /// Gets a list of actions available for the specified device
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyList<HassDeviceAction>?> GetDeviceActions(this IHomeAssistantConnection connection, string id,
+       CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationActionList, IReadOnlyList<HassDeviceAction>>(
+            new HassDeviceAutomationActionList(id), cancellationToken);
+
+    /// <summary>
+    /// Gets a list of conditions available for the specified device
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyList<HassDeviceCondition>?> GetDeviceConditions(this IHomeAssistantConnection connection, string id,
+       CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationConditionList, IReadOnlyList<HassDeviceCondition>>(
+            new HassDeviceAutomationConditionList(id), cancellationToken);
+
+    /// <summary>
+    /// Gets a list of triggers available for the specified device
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyList<HassDeviceTrigger>?> GetDeviceTriggers(this IHomeAssistantConnection connection, string id,
+       CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerList, IReadOnlyList<HassDeviceTrigger>>(
+            new HassDeviceAutomationTriggerList(id), cancellationToken);
+
+    /// <summary>
+    /// Gets capabilities for the specified device action
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="action"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassDeviceCapabilities?> GetDeviceActionCapabilities(this IHomeAssistantConnection connection,
+        HassDeviceAction action, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationActionCapabilities, HassDeviceCapabilities>(
+            new HassDeviceAutomationActionCapabilities(action), cancellationToken);
+
+    /// <summary>
+    /// Gets capabilities for the specified device condition
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="condition"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassDeviceCapabilities?> GetDeviceConditionCapabilities(this IHomeAssistantConnection connection,
+        HassDeviceCondition condition, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationConditionCapabilities, HassDeviceCapabilities>(
+            new HassDeviceAutomationConditionCapabilities(condition), cancellationToken);
+
+    /// <summary>
+    /// Gets capabilities for the specified device trigger
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="trigger"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassDeviceCapabilities?> GetDeviceTriggerCapabilities(this IHomeAssistantConnection connection,
+        HassDeviceTrigger trigger, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerCapabilities, HassDeviceCapabilities>(
+            new HassDeviceAutomationTriggerCapabilities(trigger), cancellationToken);
+
+    #endregion
+
     #region Image
 
     /// <summary>

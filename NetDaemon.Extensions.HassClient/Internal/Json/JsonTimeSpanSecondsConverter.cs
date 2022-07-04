@@ -3,14 +3,13 @@ using System.Text.Json.Serialization;
 
 namespace NetDaemon.Extensions.HassClient.Internal.Json;
 
-
 /// <summary>
-/// Coverts days to timespan and viceversa
+/// Coverts seconds to timespan and viceversa
 /// </summary>
-internal class TimeSpanDaysJsonConverter : JsonConverter<TimeSpan?>
+internal class JsonTimeSpanSecondsConverter : JsonConverter<TimeSpan?>
 {
     public override TimeSpan? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-     => reader.TokenType == JsonTokenType.Null ? default(TimeSpan?) : TimeSpan.FromDays(reader.GetInt32());
+     => reader.TokenType == JsonTokenType.Null ? default(TimeSpan?) : TimeSpan.FromSeconds(reader.GetInt32());
 
     public override void Write(Utf8JsonWriter writer, TimeSpan? value, JsonSerializerOptions options)
     {
@@ -20,7 +19,7 @@ internal class TimeSpanDaysJsonConverter : JsonConverter<TimeSpan?>
                 writer.WriteNullValue();
         }
         else
-            writer.WriteNumberValue((int)Math.Round(value.Value.TotalDays, MidpointRounding.AwayFromZero));
+            writer.WriteNumberValue((int)Math.Round(value.Value.TotalSeconds, MidpointRounding.AwayFromZero));
 
     }
 }

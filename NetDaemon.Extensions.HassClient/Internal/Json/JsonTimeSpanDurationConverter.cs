@@ -6,7 +6,7 @@ namespace NetDaemon.Extensions.HassClient.Internal.Json;
 /// <summary>
 /// Reads/Writes TimeSpan as simple time spec or as complex object
 /// </summary>
-internal class TimeSpanDurationJsonConverter : JsonConverter<TimeSpan?>
+internal class JsonTimeSpanDurationConverter : JsonConverter<TimeSpan?>
 {
     public override TimeSpan? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

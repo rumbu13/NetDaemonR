@@ -15,7 +15,7 @@ public record HassTimer
     [JsonPropertyName("icon")]
     public string? Icon { get; init; }
 
-    [JsonConverter(typeof(TimeSpanDurationJsonConverter))]
+    [JsonConverter(typeof(JsonTimeSpanDurationConverter))]
     [JsonPropertyName("duration")]
     public TimeSpan? Duration { get; init; }
 
