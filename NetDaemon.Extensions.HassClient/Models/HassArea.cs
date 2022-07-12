@@ -1,16 +1,13 @@
-﻿
-using System.Text.Json.Serialization;
-
-namespace NetDaemon.Extensions.HassClient.Models;
+﻿namespace NetDaemon.Extensions.HassClient.Models;
 
 public record HassArea
 {
     [JsonPropertyName("area_id")]
-    public string? Id { get; init; }
+    public string? Id { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("picture")]
-    public string? Picture { get; init; }
+    public string? Picture { get; set; }
 }

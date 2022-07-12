@@ -56,7 +56,8 @@ internal record HassPersonDelete : HassCommand
 
 internal record HassPersonUpdate : HassCommand
 {
-    public HassPersonUpdate(string id, string? name, string? userId, IEnumerable<string>? deviceTrackers, string? picture) :
+    public HassPersonUpdate(string id, string? name, string? userId, IEnumerable<string>? deviceTrackers, 
+        string? picture) :
         base("person/update")
     {
         this.PersonId = id;

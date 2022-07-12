@@ -1,12 +1,12 @@
-﻿
-using System.Text.Json.Serialization;
-
-namespace NetDaemon.Extensions.HassClient.Models;
+﻿namespace NetDaemon.Extensions.HassClient.Models;
 
 public class HassUser
 {
     [JsonPropertyName("id")]
     public string? Id { get; init; }
+
+    [JsonPropertyName("username")]
+    public string? Username { get; init; }
 
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -14,34 +14,22 @@ public class HassUser
     [JsonPropertyName("is_owner")]
     public bool? IsOwner { get; init; }
 
-    [JsonPropertyName("is_admin")]
-    public bool? IsAdmin { get; init; }
+    [JsonPropertyName("is_active")]
+    public bool? IsActive { get; init; }
+
+    [JsonPropertyName("local_only")]
+    public bool? LocalOnly { get; init; }
+
+    [JsonPropertyName("system_generated")]
+    public bool? SystemGenerated { get; init; }
+
+    [JsonPropertyName("group_ids")]
+    public string[]? Groups { get; init; }
 
     [JsonPropertyName("credentials")]
     public HassUserCredential?[]? Credentials { get; init; }
 
-    [JsonPropertyName("mfa_modules")]
-    public HassUserMfaModule?[]? MfaModules { get; init; }
-}
-
-public class HassUserCredential
-{
-    [JsonPropertyName("auth_provider_type")]
-    public string? Id { get; init; }
-
-    [JsonPropertyName("auth_provider_type")]
-    public string? Type { get; init; }
 
 }
 
-public class HassUserMfaModule
-{
-    [JsonPropertyName("id")]
-    public string? Id { get; init; }
 
-    [JsonPropertyName("name")]
-    public string? Name { get; init; }
-
-    [JsonPropertyName("enabled")]
-    public bool? Enabled { get; init; }
-}

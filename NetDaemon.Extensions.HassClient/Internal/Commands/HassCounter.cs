@@ -18,7 +18,8 @@ internal record HassCounterList : HassCommand
 
 internal record HassCounterCreate : HassCommand
 {
-    public HassCounterCreate(string name, string? icon, int? initialValue, int? step, int? minimum, int? maximum, bool? restore) : 
+    public HassCounterCreate(string name, string? icon, int? initialValue, int? step, int? minimum, int? maximum, 
+        bool? restore) : 
         base("counter/create")
     {
         this.Name = name;
@@ -67,7 +68,8 @@ internal record HassCounterDelete : HassCommand
 
 internal record HassCounterUpdate : HassCommand
 {
-    public HassCounterUpdate(string id, string? name, string? icon, int? initialValue, int? step, int? minimum, int? maximum, bool? restore) :
+    public HassCounterUpdate(string id, string? name, string? icon, int? initialValue, int? step, int? minimum, 
+        int? maximum, bool? restore) :
         base("counter/update")
     {
         this.CounterId = id;

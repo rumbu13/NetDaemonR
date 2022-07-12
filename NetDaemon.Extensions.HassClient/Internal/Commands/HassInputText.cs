@@ -74,8 +74,8 @@ internal record HassInputTextDelete : HassCommand
 
 internal record HassInputTextUpdate : HassCommand
 {
-    public HassInputTextUpdate(string id, string? name, int? minLength, int? maxLength, string? initialValue, string? icon,
-        string? unitOfMeasurement, string? pattern, HassInputTextMode? mode) :
+    public HassInputTextUpdate(string id, string? name, int? minLength, int? maxLength, string? initialValue, 
+        string? icon, string? unitOfMeasurement, string? pattern, HassInputTextMode? mode) :
         base("input_text/update")
     {
         this.InputTextId = id;

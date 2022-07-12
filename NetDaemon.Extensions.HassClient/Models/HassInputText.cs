@@ -1,8 +1,4 @@
-﻿
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-
-namespace NetDaemon.Extensions.HassClient.Models;
+﻿namespace NetDaemon.Extensions.HassClient.Models;
 
 public record HassInputText
 {
@@ -36,11 +32,4 @@ public record HassInputText
 
 }
 
-public enum HassInputTextMode
-{
-    [EnumMember(Value = "text")]
-    Text,
-    [EnumMember(Value = "password")]
-    Password
-}
 

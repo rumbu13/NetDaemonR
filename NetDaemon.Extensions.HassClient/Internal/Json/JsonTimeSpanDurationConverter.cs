@@ -6,13 +6,10 @@ namespace NetDaemon.Extensions.HassClient.Internal.Json;
 /// <summary>
 /// Reads/Writes TimeSpan as simple time spec or as complex object
 /// </summary>
-internal class JsonTimeSpanDurationConverter : JsonConverter<TimeSpan?>
+internal class JsonTimeSpanDurationConverter : JsonConverter<TimeSpan>
 {
-    public override TimeSpan? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType == JsonTokenType.Null)
-            return default(TimeSpan?);
-
         if (reader.TokenType == JsonTokenType.Number)
             return TimeSpan.FromSeconds(reader.GetDouble());
 
@@ -57,34 +54,27 @@ internal class JsonTimeSpanDurationConverter : JsonConverter<TimeSpan?>
 
     }
 
-    public override void Write(Utf8JsonWriter writer, TimeSpan? value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
     {
-        if (value == null)
-        {
-            if (options.DefaultIgnoreCondition >= JsonIgnoreCondition.WhenWritingDefault)
-                writer.WriteNullValue();
-        }
+
+        var duration = value.Duration();
+
+        if (duration.TotalDays < 1 && duration.Milliseconds == 0)
+            writer.WriteStringValue(duration.ToString("hh:mm:ss"));
         else
         {
-            var duration = value.Value.Duration();
-
-            if (duration.TotalDays < 1 && duration.Milliseconds == 0)
-                writer.WriteStringValue(duration.ToString("hh:mm:ss"));
-            else
-            {
-                writer.WriteStartObject();
-                if (duration.Days > 0)
-                    writer.WriteNumber("days", duration.Days);
-                if (duration.Hours > 0)
-                    writer.WriteNumber("hours", duration.Hours);
-                if (duration.Minutes > 0)
-                    writer.WriteNumber("minutes", duration.Minutes);
-                if (duration.Seconds > 0)
-                    writer.WriteNumber("seconds", duration.Seconds);
-                if (duration.Milliseconds > 0)
-                    writer.WriteNumber("milliseconds", duration.Milliseconds);
-                writer.WriteEndObject();
-            }
+            writer.WriteStartObject();
+            if (duration.Days > 0)
+                writer.WriteNumber("days", duration.Days);
+            if (duration.Hours > 0)
+                writer.WriteNumber("hours", duration.Hours);
+            if (duration.Minutes > 0)
+                writer.WriteNumber("minutes", duration.Minutes);
+            if (duration.Seconds > 0)
+                writer.WriteNumber("seconds", duration.Seconds);
+            if (duration.Milliseconds > 0)
+                writer.WriteNumber("milliseconds", duration.Milliseconds);
+            writer.WriteEndObject();
         }
     }
 }

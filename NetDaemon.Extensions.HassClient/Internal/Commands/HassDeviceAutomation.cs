@@ -37,39 +37,31 @@ internal record HassDeviceAutomationTriggerList : HassCommand
     public string DeviceId { get; init; }
 }
 
-internal record HassDeviceAutomationActionCapabilities : HassCommand
+internal record HassDeviceAutomationTriggerSubscribe : HassCommand
 {
-    public HassDeviceAutomationActionCapabilities(HassDeviceAction action) :
-        base("device_automation/action/capabilities")
+    public HassDeviceAutomationTriggerSubscribe(HassDeviceAutomationTrigger trigger) :
+        base("subscribe_trigger")
     {
-        this.Action = action;
+        Trigger = trigger;
     }
-    [JsonPropertyName("action")]
-    public HassDeviceAction Action { get; init; }
-}
 
-internal record HassDeviceAutomationConditionCapabilities : HassCommand
-{
-    public HassDeviceAutomationConditionCapabilities(HassDeviceCondition condition) :
-        base("device_automation/condition/capabilities")
-    {
-        this.Condition = condition;
-    }
-    [JsonPropertyName("condition")]
-    public HassDeviceCondition Condition { get; init; }
-}
-
-
-internal record HassDeviceAutomationTriggerCapabilities : HassCommand
-{
-    public HassDeviceAutomationTriggerCapabilities(HassDeviceTrigger trigger) :
-        base("device_automation/trigger/capabilities")
-    {
-        this.Trigger = trigger;
-    }
     [JsonPropertyName("trigger")]
-    public HassDeviceTrigger Trigger { get; init; }
+    public HassDeviceAutomationTrigger Trigger { get; init; }
 }
+
+internal record HassDeviceAutomationTriggerUnsubscribe : HassCommand
+{
+    public HassDeviceAutomationTriggerUnsubscribe(int id) :
+        base("unsubscribe_events")
+    {
+        SubscriptionId = id;
+    }
+
+    [JsonPropertyName("subscription")]
+    public int SubscriptionId { get; init; }
+}
+
+
 
 
 

@@ -1,8 +1,4 @@
-﻿
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-
-namespace NetDaemon.Extensions.HassClient.Models;
+﻿namespace NetDaemon.Extensions.HassClient.Models;
 
 public record HassEntity
 {
@@ -36,30 +32,6 @@ public record HassEntity
     [JsonConverter(typeof(JsonStringEnumConverter))]
     [JsonPropertyName("entity_category")]
     public HassEntityCategory? Category { get; init; }
-
-    [JsonPropertyName("unique_id")]
-    public string? UniqueId { get; init; }
-
-    [JsonPropertyName("capabilities")]
-    public IDictionary<string, Object>? Capabilities { get; init; }
-
-    [JsonPropertyName("original_name")]
-    public string? OriginalName { get; init; }
-
-    [JsonPropertyName("original_icon")]
-    public string? OriginalIcon { get; init; }
-
-    [JsonPropertyName("device_class")]
-    public string? DeviceClass { get; init; }
-
-    [JsonPropertyName("original_device_class")]
-    public string? OriginalDeviceClass { get; init; }
+   
 }
 
-public enum HassEntityCategory
-{
-    [EnumMember(Value="config")]
-    Configuration,
-    [EnumMember(Value = "diagnostic")]
-    Diagnostic
-}

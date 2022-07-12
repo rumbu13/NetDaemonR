@@ -20,7 +20,7 @@ internal class PersonHandler2 : AutomationHandler, IAsyncInitializable
     NumberEntity? directionThreshold;
     NumberEntity? aroundThreshold;
     NumberEntity? vacationThreshold;
-
+    
     readonly ProximityEntity proximity;
     readonly ZoneEntity work;
     readonly ZoneEntity school;

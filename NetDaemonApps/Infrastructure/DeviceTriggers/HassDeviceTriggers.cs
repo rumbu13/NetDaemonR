@@ -32,7 +32,7 @@ namespace NetDaemonApps.Infrastructure.DeviceTriggers
         {
             var devices = await connection.GetDevicesAsync(cancellationToken);
             
-           // var areas = await connection.GetAreasAsync(cancellationToken);
+            var areas = await connection.GetAreasAsync(cancellationToken);
 
             foreach (var device in devices!)
             {

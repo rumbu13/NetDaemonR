@@ -1,6 +1,4 @@
-﻿
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using NetDaemon.Extensions.HassClient.Internal.Json;
 
 namespace NetDaemon.Extensions.HassClient.Models;
 
@@ -12,11 +10,13 @@ public record HassDevice
     [JsonPropertyName("config_entries")]
     public string[]? ConfigEntries { get; init; }
 
+    [JsonConverter(typeof(JsonDeviceConnectionsConverter))]
     [JsonPropertyName("connections")]
-    public string [][]? Connections { get; init; }
+    public HassDeviceConnection[]? Connections { get; init; }
 
+    [JsonConverter(typeof(JsonDeviceIdentifiersConverter))]
     [JsonPropertyName("identifiers")]
-    public string[][]? Identifiers { get; init; }
+    public HassDeviceIdentifier[]? Identifiers { get; init; }
 
     [JsonPropertyName("manufacturer")]
     public string? Manufacturer { get; init; }
@@ -44,7 +44,7 @@ public record HassDevice
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     [JsonPropertyName("entry_type")]
-    public HassDeviceEntryType? EntryType { get; init; }
+    public HassDeviceType? EntryType { get; init; }
 
     [JsonPropertyName("disabled_by")]
     public string? DisabledBy { get; init; }
@@ -54,8 +54,3 @@ public record HassDevice
 
 }
 
-public enum HassDeviceEntryType
-{
-    [EnumMember(Value="service")]
-    Service
-}

@@ -9,33 +9,6 @@ namespace NetDaemon.Extensions.HassClient;
 
 public static class IHomeAssistantConnectionExtensions
 {
-    #region Alexa
-
-    /// <summary>
-    /// Gets a list of Alexa entities
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<IReadOnlyCollection<HassAlexaEntity>?> GetAlexaEntitiesAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassAlexaList, IReadOnlyCollection<HassAlexaEntity>>(
-            new HassAlexaList(), cancellationToken);
-
-    /// <summary>
-    /// Synchronizes Alexa entities with the cloud
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task SyncAlexaEntitiesAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassAlexaSync, Object>(
-            new HassAlexaSync(), cancellationToken);
-
-    #endregion
 
     #region Area
 
@@ -94,435 +67,6 @@ public static class IHomeAssistantConnectionExtensions
    
         => connection.SendCommandAndReturnResponseAsync<HassAreaUpdate, Models.HassArea>(
             new HassAreaUpdate(id, name, picture), cancellationToken);
-
-    #endregion
-
-    #region Analytics
-
-    /// <summary>
-    /// Gets analytics preferences
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns>Information about the current analytics preferences</returns>
-    public static Task<HassAnalytics?> GetAnalyticsAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-    
-        => connection.SendCommandAndReturnResponseAsync<HassAnalyticsGet, HassAnalytics>(
-            new HassAnalyticsGet(), cancellationToken);
-
-    /// <summary>
-    /// Sets analytics preferences
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="base"></param>
-    /// <param name="diagnostics"></param>
-    /// <param name="usage"></param>
-    /// <param name="statistics"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns>Information about the current analytics preferences</returns>
-    public static Task<HassAnalytics?> SetAnalyticsAsync(this IHomeAssistantConnection connection, bool? @base, 
-        bool? diagnostics = default, bool? statistics = default, bool? usage = default,
-        CancellationToken cancellationToken = default)
-
-        =>  connection.SendCommandAndReturnResponseAsync<HassAnalyticsSet, HassAnalytics>(
-            new HassAnalyticsSet(@base, diagnostics, statistics, usage), cancellationToken);
-
-    #endregion
-
-    #region Auth
-
-    /// <summary>
-    /// Gets information about current user
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassUser?> GetCurrentUserAsync(this IHomeAssistantConnection connection,
-         CancellationToken cancellationToken = default)
-    
-        => connection.SendCommandAndReturnResponseAsync<HassCurrentUser, HassUser>(
-            new HassCurrentUser(), cancellationToken);
-
-    /// <summary>
-    /// Creates a long lived access token
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="lifeSpan">Use a value greater than or equal to 1 day</param>
-    /// <param name="clientName"></param>
-    /// <param name="clientIcon"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<string?> CreateAccessTokenAsync(this IHomeAssistantConnection connection, TimeSpan lifeSpan, 
-        string clientName, string? clientIcon = default, CancellationToken cancellationToken = default)    
-
-        => connection.SendCommandAndReturnResponseAsync<HassTokenCreate, string>(
-            new HassTokenCreate(lifeSpan, clientName, clientIcon), cancellationToken) ;
-
-    /// <summary>
-    /// Lists the curent access tokens
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<IReadOnlyCollection<HassAccessToken>?> GetAccessTokensAsync(this IHomeAssistantConnection connection,
-         CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassTokenList, IReadOnlyCollection<HassAccessToken>>(
-            new HassTokenList(), cancellationToken);
-
-    /// <summary>
-    /// Deletes the specified token
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task DeleteAccessTokenAsync(this IHomeAssistantConnection connection, string id,
-        CancellationToken cancellationToken = default)
-  
-        => connection.SendCommandAndReturnResponseAsync<HassTokenDelete, Object>(
-            new HassTokenDelete(id), cancellationToken);
-
-    /// <summary>
-    /// Signs the specified path
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="path"></param>
-    /// <param name="expires">default value is 30 seconds</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassPath?> SignPathAsync(this IHomeAssistantConnection connection, string path, 
-        TimeSpan? expires = default, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassSignPath, HassPath>(
-            new HassSignPath(path, expires), cancellationToken);
-
-    /// <summary>
-    /// Creates a new user
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="userId"></param>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task CreateUserAsync(this IHomeAssistantConnection connection, string userId, string userName, 
-        string password, CancellationToken cancellationToken = default)
-
-       => connection.SendCommandAndReturnResponseAsync<HassUserCreate, Object>(
-           new HassUserCreate(userId, userName, password), cancellationToken);
-
-    /// <summary>
-    /// Changes password for the specified user
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="userId"></param>
-    /// <param name="password"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task ChangePasswordAsync(this IHomeAssistantConnection connection, string userId, string password, 
-        CancellationToken cancellationToken = default)
-
-       => connection.SendCommandAndReturnResponseAsync<HassUserChangePassword, Object>(
-           new HassUserChangePassword(userId, password), cancellationToken);
-
-    #endregion
-
-    #region Application Credentials 
-
-    /// <summary>
-    /// Gets a list of current credentials
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<IReadOnlyCollection<HassCredential>?> GetCredentialsAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-    
-        => connection.SendCommandAndReturnResponseAsync<HassCredentialsList, IReadOnlyCollection<HassCredential>>(
-            new HassCredentialsList(), cancellationToken);
-
-
-    /// <summary>
-    /// Gets the current configuration for credentials
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassCredentialsConfiguration?> GetCredentialsConfigurationAsync(this IHomeAssistantConnection connection,
-         CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassCredentialsConfig, HassCredentialsConfiguration>(
-            new HassCredentialsConfig(), cancellationToken);
-
-    /// <summary>
-    /// Deletes the specified credential
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="id"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task DeleteCredentialAsync(this IHomeAssistantConnection connection, string id,
-        CancellationToken cancellationToken = default)
-        
-        => connection.SendCommandAndReturnResponseAsync<HassCredentialsDelete, Object>(
-            new HassCredentialsDelete(id), cancellationToken);
-
-    /// <summary>
-    /// Creates a new credential
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="domain"></param>
-    /// <param name="clientId"></param>
-    /// <param name="clientSecret"></param>
-    /// <param name="authDomain"></param>
-    /// <param name="name"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassCredential?> CreateCredentialAsync(this IHomeAssistantConnection connection, string domain, 
-        string clientId, string clientSecret, string? authDomain = default, string? name = default, 
-        CancellationToken cancellationToken = default)
-    
-        => connection.SendCommandAndReturnResponseAsync<HassCredentialsCreate, HassCredential>(
-            new HassCredentialsCreate(domain, clientId, clientSecret, authDomain, name), cancellationToken);
-
-
-    #endregion
-
-    #region Backup
-
-    /// <summary>
-    /// Gets backup information
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassBackupInfo?> GetBackupInfoAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassBackupGetInfo, HassBackupInfo>(
-            new HassBackupGetInfo(), cancellationToken);
-
-    /// <summary>
-    /// Deletes the specified backup
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="connection"></param>
-    /// <param name="slug"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task DeleteBackupAsync(this IHomeAssistantConnection connection, string slug,
-       CancellationToken cancellationToken = default)
-
-       => connection.SendCommandAndReturnResponseAsync<HassBackupDelete, Object>(
-           new HassBackupDelete(slug), cancellationToken);
-
-    /// <summary>
-    /// Generates a new backup
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassBackup?> CreateBackupAsync(this IHomeAssistantConnection connection,
-       CancellationToken cancellationToken = default)
-
-       => connection.SendCommandAndReturnResponseAsync<HassBackupCreate, HassBackup>(
-           new HassBackupCreate(), cancellationToken);
-
-    #endregion
-
-    #region Blueprint
-
-    /// <summary>
-    /// Gets a list of blueprints
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="domain"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<IReadOnlyDictionary<string, HassBlueprint>?> GetBlueprintsAsync(this IHomeAssistantConnection connection,
-       HassBlueprintDomain domain, CancellationToken cancellationToken = default)
-
-       => connection.SendCommandAndReturnResponseAsync<HassBlueprintList, IReadOnlyDictionary<string, HassBlueprint>>(
-           new HassBlueprintList(domain), cancellationToken);
-
-    /// <summary>
-    /// Imports a blueprint from the specified url
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="url"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassBlueprintImportResult?> ImportBlueprintAsync(this IHomeAssistantConnection connection,
-      string url, CancellationToken cancellationToken = default)
-
-      => connection.SendCommandAndReturnResponseAsync<HassBlueprintImport, HassBlueprintImportResult>(
-          new HassBlueprintImport(url), cancellationToken);
-
-    /// <summary>
-    /// Save the yaml blueprint definition to the specified path
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="domain"></param>
-    /// <param name="path"></param>
-    /// <param name="yaml"></param>
-    /// <param name="sourceUrl"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task SaveBlueprintAsync(this IHomeAssistantConnection connection, HassBlueprintDomain domain,
-        string path, string yaml, string? sourceUrl = default, CancellationToken cancellationToken = default)
-
-      => connection.SendCommandAndReturnResponseAsync<HassBlueprintSave, Object>(
-          new HassBlueprintSave(domain, path, yaml, sourceUrl), cancellationToken);
-
-    /// <summary>
-    /// Deletes the specified blueprint
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="domain"></param>
-    /// <param name="path"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassBlueprintImportResult?> DeleteBlueprintAsync(this IHomeAssistantConnection connection,
-     HassBlueprintDomain domain, string path, CancellationToken cancellationToken = default)
-
-     => connection.SendCommandAndReturnResponseAsync<HassBlueprintDelete, HassBlueprintImportResult>(
-         new HassBlueprintDelete(domain, path), cancellationToken);
-
-    #endregion
-
-    #region Camera
-
-    /// <summary>
-    /// Gets the stream url for the specified camera
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="entityId"></param>
-    /// <param name="format"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassCameraStream?> GetCameraStreamAsync(this IHomeAssistantConnection connection, string entityId, 
-        string? format = default, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassCameraGetStream, HassCameraStream>(
-            new HassCameraGetStream(entityId, format), cancellationToken);
-
-    /// <summary>
-    /// Gets RTC offer for the specified camera
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="entityId"></param>
-    /// <param name="offer"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassCameraAnswer?> GetCameraWebRtcOfferAsync(this IHomeAssistantConnection connection, string entityId,
-        string offer, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassCameraGetWebRtc, HassCameraAnswer>(
-            new HassCameraGetWebRtc(entityId, offer), cancellationToken);
-
-    /// <summary>
-    /// Gets the preferences for the specified camera
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="entityId"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassCameraPreferences?> GetCameraPreferences(this IHomeAssistantConnection connection, string entityId,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassCameraGetPrefs, HassCameraPreferences>(
-            new HassCameraGetPrefs(entityId), cancellationToken);
-
-    /// <summary>
-    /// Gets the preferences for the specified camera 
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="entityId"></param>
-    /// <param name="preloadStream"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassCameraPreferences?> SetCameraPreferences(this IHomeAssistantConnection connection, string entityId,
-        bool? preloadStream, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassCameraUpdatePrefs, HassCameraPreferences>(
-            new HassCameraUpdatePrefs(entityId, preloadStream), cancellationToken);
-
-    #endregion
-
-    #region Cloud
-
-    /// <summary>
-    /// Logins to Home Assistant Cloud
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="email"></param>
-    /// <param name="password"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task CloudLogin(this IHomeAssistantConnection connection, string email, 
-        string password, CancellationToken cancellationToken = default)
-    {
-        return connection.PostApiCallAsync<Object>("cloud/login", cancellationToken, new { email, password });
-    }
-
-    /// <summary>
-    /// Logout from Home Assistant Cloud
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="email"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task CloudLogout(this IHomeAssistantConnection connection, string email,
-        CancellationToken cancellationToken = default)
-    {
-        return connection.PostApiCallAsync<Object>("cloud/logout", cancellationToken, new { email });
-    }
-
-    /// <summary>
-    /// Initiate a forgot password action
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="email"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task CloudForgotPassword(this IHomeAssistantConnection connection, string email,
-        CancellationToken cancellationToken = default)
-    {
-        return connection.PostApiCallAsync<Object>("cloud/forgot_password", cancellationToken, new { email });
-    }
-
-    /// <summary>
-    /// Registers to Home Assistant Cloud
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="email"></param>
-    /// <param name="password"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task CloudRegister(this IHomeAssistantConnection connection, string email, string password,
-        CancellationToken cancellationToken = default)
-    {
-        return connection.PostApiCallAsync<Object>("cloud/register", cancellationToken, new { email, password });
-    }
-
-    /// <summary>
-    /// Resend confirmation to Home Assistant Cloud
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="email"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task CloudResendConfirmation(this IHomeAssistantConnection connection, string email,
-        CancellationToken cancellationToken = default)
-    {
-        return connection.PostApiCallAsync<Object>("cloud/resend_confirm", cancellationToken, new { email });
-
-    }
 
     #endregion
 
@@ -597,73 +141,6 @@ public static class IHomeAssistantConnectionExtensions
 
     #endregion
     
-    #region Dashboard
-
-    /// <summary>
-    /// Gets a list of lovelace dashboards
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<IReadOnlyCollection<HassDashboard>?> GetDashboardsAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassDashboardList, IReadOnlyCollection<HassDashboard>>(
-            new HassDashboardList(), cancellationToken);
-
-    /// <summary>
-    /// Creates a new lovelace dashboard
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="title"></param>
-    /// <param name="url"></param>
-    /// <param name="requiresAdmin"></param>
-    /// <param name="icon"></param>
-    /// <param name="showInSidebar"></param>
-    /// <param name="mode"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassDashboard?> CreateDashboardAsync(this IHomeAssistantConnection connection,
-       string title, string url, bool? requiresAdmin = default, string? icon = default, bool? showInSidebar = default,
-       HassDashboardMode? mode = default, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassDashboardCreate, HassDashboard>(
-            new HassDashboardCreate(title, url, requiresAdmin, icon, showInSidebar, mode), cancellationToken);
-
-    /// <summary>
-    /// Updates the specified lovelace dashboard
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="id"></param>
-    /// <param name="title"></param>
-    /// <param name="requiresAdmin"></param>
-    /// <param name="icon"></param>
-    /// <param name="showInSidebar"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassDashboard?> UpdateDashboardAsync(this IHomeAssistantConnection connection, string id,
-       string? title, bool? requiresAdmin = default, string? icon = default, bool? showInSidebar = default,
-       CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassDashboardUpdate, HassDashboard>(
-             new HassDashboardUpdate(id, title, requiresAdmin, icon, showInSidebar), cancellationToken);
-
-    /// <summary>
-    /// Deletes the specified lovelace dashboard
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public static Task DeleteDashboardAsync(this IHomeAssistantConnection connection, string id,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassDashboardDelete, Object>(
-            new HassDashboardDelete(id), cancellationToken);
-
-    #endregion
-
     #region Device
 
     /// <summary>
@@ -703,7 +180,7 @@ public static class IHomeAssistantConnectionExtensions
     /// <param name="configEntryId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static Task<Models.HassDevice?> DeleteDeviceConfiguration(this IHomeAssistantConnection connection, string id,
+    public static Task<Models.HassDevice?> DeleteDeviceConfigurationAsync(this IHomeAssistantConnection connection, string id,
         string configEntryId, CancellationToken cancellationToken = default)
 
         => connection.SendCommandAndReturnResponseAsync<HassDeviceRemoveConfig, Models.HassDevice>(
@@ -716,10 +193,10 @@ public static class IHomeAssistantConnectionExtensions
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static Task<IReadOnlyList<HassDeviceAction>?> GetDeviceActions(this IHomeAssistantConnection connection, string id,
+    public static Task<IReadOnlyList<HassDeviceAutomationAction>?> GetDeviceActionsAsync(this IHomeAssistantConnection connection, string id,
        CancellationToken cancellationToken = default)
 
-        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationActionList, IReadOnlyList<HassDeviceAction>>(
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationActionList, IReadOnlyList<HassDeviceAutomationAction>>(
             new HassDeviceAutomationActionList(id), cancellationToken);
 
     /// <summary>
@@ -729,10 +206,10 @@ public static class IHomeAssistantConnectionExtensions
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static Task<IReadOnlyList<HassDeviceCondition>?> GetDeviceConditions(this IHomeAssistantConnection connection, string id,
+    public static Task<IReadOnlyList<HassDeviceAutomationCondition>?> GetDeviceConditionsAsync(this IHomeAssistantConnection connection, string id,
        CancellationToken cancellationToken = default)
 
-        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationConditionList, IReadOnlyList<HassDeviceCondition>>(
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationConditionList, IReadOnlyList<HassDeviceAutomationCondition>>(
             new HassDeviceAutomationConditionList(id), cancellationToken);
 
     /// <summary>
@@ -742,50 +219,141 @@ public static class IHomeAssistantConnectionExtensions
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static Task<IReadOnlyList<HassDeviceTrigger>?> GetDeviceTriggers(this IHomeAssistantConnection connection, string id,
+    public static Task<IReadOnlyList<HassDeviceAutomationTrigger>?> GetDeviceTriggersAsync(this IHomeAssistantConnection connection, string id,
        CancellationToken cancellationToken = default)
 
-        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerList, IReadOnlyList<HassDeviceTrigger>>(
+        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerList, IReadOnlyList<HassDeviceAutomationTrigger>>(
             new HassDeviceAutomationTriggerList(id), cancellationToken);
 
     /// <summary>
-    /// Gets capabilities for the specified device action
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="action"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassDeviceCapabilities?> GetDeviceActionCapabilities(this IHomeAssistantConnection connection,
-        HassDeviceAction action, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationActionCapabilities, HassDeviceCapabilities>(
-            new HassDeviceAutomationActionCapabilities(action), cancellationToken);
-
-    /// <summary>
-    /// Gets capabilities for the specified device condition
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="condition"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassDeviceCapabilities?> GetDeviceConditionCapabilities(this IHomeAssistantConnection connection,
-        HassDeviceCondition condition, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationConditionCapabilities, HassDeviceCapabilities>(
-            new HassDeviceAutomationConditionCapabilities(condition), cancellationToken);
-
-    /// <summary>
-    /// Gets capabilities for the specified device trigger
+    /// Subscribes to receive notifications for the specified trigger
     /// </summary>
     /// <param name="connection"></param>
     /// <param name="trigger"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static Task<HassDeviceCapabilities?> GetDeviceTriggerCapabilities(this IHomeAssistantConnection connection,
-        HassDeviceTrigger trigger, CancellationToken cancellationToken = default)
+    public static async Task<int> SubscribeDeviceTriggerAsync(this IHomeAssistantConnection connection, HassDeviceAutomationTrigger trigger,
+       CancellationToken cancellationToken = default)
+    {
+        var cmd = new HassDeviceAutomationTriggerSubscribe(trigger);
+        await connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerSubscribe, Object>(
+            cmd, cancellationToken).ConfigureAwait(false);
+        return cmd.Id;
+    }
 
-        => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerCapabilities, HassDeviceCapabilities>(
-            new HassDeviceAutomationTriggerCapabilities(trigger), cancellationToken);
+    /// <summary>
+    /// Unsubscribe from the specified subscription
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="subcriptionId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task UnsubscribeDeviceTriggerAsync(this IHomeAssistantConnection connection, int subcriptionId,
+       CancellationToken cancellationToken = default)
+     
+       => connection.SendCommandAndReturnResponseAsync<HassDeviceAutomationTriggerUnsubscribe, Object>(
+            new HassDeviceAutomationTriggerUnsubscribe(subcriptionId), cancellationToken);
+
+
+    #endregion
+
+    #region Entity
+
+    /// <summary>
+    /// Gets a list of entities
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyCollection<Models.HassEntity>?> GetEntitiesAsync(this IHomeAssistantConnection connection,
+      CancellationToken cancellationToken = default)
+
+      => connection.SendCommandAndReturnResponseAsync<HassEntityList, IReadOnlyCollection<Models.HassEntity>>(
+          new HassEntityList(), cancellationToken);
+
+    /// <summary>
+    /// Gets extended information about the specified entity
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassEntityExtended?> GetEntityAsync(this IHomeAssistantConnection connection, string id,
+      CancellationToken cancellationToken = default)
+
+      => connection.SendCommandAndReturnResponseAsync<HassEntityGet, HassEntityExtended>(
+          new HassEntityGet(id), cancellationToken);
+
+    /// <summary>
+    /// Deletes the specified entity
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task DeleteEntityAsync(this IHomeAssistantConnection connection, string id,
+      CancellationToken cancellationToken = default)
+
+      => connection.SendCommandAndReturnResponseAsync<HassEntityDelete, Object>(
+          new HassEntityDelete(id), cancellationToken);
+
+    /// <summary>
+    /// Updates the specified sensor entity
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="icon"></param>
+    /// <param name="deviceClass"></param>
+    /// <param name="areaId"></param>
+    /// <param name="disabledBy"></param>
+    /// <param name="hiddenBy"></param>
+    /// <param name="newEntityId"></param>
+    /// <param name="optionsDomain"></param>
+    /// <param name="unitOfMeasurement"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassEntityExtended?> UpdateSensorEntityAsync(this IHomeAssistantConnection connection, 
+        string id, string? name = default, string? icon = default, string? deviceClass = default, string? areaId = default,
+        string? disabledBy = default, string? hiddenBy = default, string? newEntityId = default, 
+        string? optionsDomain = default, string? unitOfMeasurement = default,
+        CancellationToken cancellationToken = default)
+
+      => connection.SendCommandAndReturnResponseAsync<HassEntityUpdateSensor, HassEntityExtended>(
+          new HassEntityUpdateSensor(id, name, icon, deviceClass, areaId, disabledBy, hiddenBy, newEntityId, 
+              optionsDomain, unitOfMeasurement), cancellationToken);
+
+    /// <summary>
+    /// Updates the specified weather entity
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="icon"></param>
+    /// <param name="deviceClass"></param>
+    /// <param name="areaId"></param>
+    /// <param name="disabledBy"></param>
+    /// <param name="hiddenBy"></param>
+    /// <param name="newEntityId"></param>
+    /// <param name="optionsDomain"></param>
+    /// <param name="precipitationUnit"></param>
+    /// <param name="pressureUnit"></param>
+    /// <param name="temperatureUnit"></param>
+    /// <param name="visibilityUnit"></param>
+    /// <param name="windSpeedUnit"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassEntityExtended?> UpdateWeatherEntityAsync(this IHomeAssistantConnection connection,
+        string id, string? name = default, string? icon = default, string? deviceClass = default, string? areaId = default,
+        string? disabledBy = default, string? hiddenBy = default, string? newEntityId = default,
+        string? optionsDomain = default, string? precipitationUnit = default, string? pressureUnit = default, 
+        string? temperatureUnit = default, string? visibilityUnit = default, string? windSpeedUnit = default,
+        CancellationToken cancellationToken = default)
+
+      => connection.SendCommandAndReturnResponseAsync<HassEntityUpdateWeather, HassEntityExtended>(
+          new HassEntityUpdateWeather(id, name, icon, deviceClass, areaId, disabledBy, hiddenBy, newEntityId,
+              optionsDomain, precipitationUnit, pressureUnit, temperatureUnit, visibilityUnit, windSpeedUnit), 
+          cancellationToken);
 
     #endregion
 
@@ -1251,65 +819,6 @@ public static class IHomeAssistantConnectionExtensions
 
     #endregion
 
-    #region Resource
-
-    /// <summary>
-    /// Gets a list of lovelace dashboards
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<IReadOnlyCollection<HassResource>?> GetResourcesAsync(this IHomeAssistantConnection connection,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassResourceList, IReadOnlyCollection<HassResource>>(
-            new HassResourceList(), cancellationToken);
-
-    /// <summary>
-    /// Creates a new lovelace dashboard
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="type"></param>
-    /// <param name="url"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassResource?> CreateResourceAsync(this IHomeAssistantConnection connection, HassResourceType type,
-       string url, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassResourceCreate, HassResource>(
-            new HassResourceCreate(type, url), cancellationToken);
-
-    /// <summary>
-    /// Updates the specified lovelace dashboard
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="id"></param>
-    /// <param name="type"></param>
-    /// <param name="url"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public static Task<HassResource?> UpdateResourceAsync(this IHomeAssistantConnection connection, string id,
-        HassResourceType? type = default, string? url = default, CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassResourceUpdate, HassResource>(
-             new HassResourceUpdate(id, type, url), cancellationToken);
-
-    /// <summary>
-    /// Deletes the specified lovelace dashboard
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="cancellationToken"></param>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public static Task DeleteResourceAsync(this IHomeAssistantConnection connection, string id,
-        CancellationToken cancellationToken = default)
-
-        => connection.SendCommandAndReturnResponseAsync<HassResourceDelete, Object>(
-            new HassResourceDelete(id), cancellationToken);
-
-    #endregion
-
     #region Person
 
     /// <summary>
@@ -1372,6 +881,75 @@ public static class IHomeAssistantConnectionExtensions
 
         => connection.SendCommandAndReturnResponseAsync<HassPersonDelete, Object>(
             new HassPersonDelete(id), cancellationToken);
+
+    #endregion
+
+    #region ShoppingList
+
+    /// <summary>
+    /// Gets the content of the shopping list
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyCollection<HassShoppingListItem>?> GetShoppingListAsync(this IHomeAssistantConnection connection,
+        CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassShoppingItemsList, IReadOnlyCollection<HassShoppingListItem>>(
+            new HassShoppingItemsList(), cancellationToken);
+
+    /// <summary>
+    /// Clears the shopping list
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task ClearShoppingListAsync(this IHomeAssistantConnection connection,
+        CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassShoppingItemsClear, Object>(
+            new HassShoppingItemsClear(), cancellationToken);
+
+    /// <summary>
+    /// Adds a new item to the shopping list
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="name"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassShoppingListItem?> CreateShoppingListItemAsync(this IHomeAssistantConnection connection,
+        string name, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassShoppingItemCreate, HassShoppingListItem>(
+            new HassShoppingItemCreate(name), cancellationToken);
+
+    /// <summary>
+    /// Updates the specified item from the shopping list
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="complete"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassShoppingListItem?> UpdateShoppingListItemAsync(this IHomeAssistantConnection connection, 
+        string id, string? name = default, bool? complete = default, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassShoppingItemUpdate, HassShoppingListItem>(
+             new HassShoppingItemUpdate(id, name, complete), cancellationToken);
+
+    /// <summary>
+    /// Reorders items in the shopping list
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="ids"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task ReorderShoppingListAsync(this IHomeAssistantConnection connection,
+        IEnumerable<string> ids, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassShoppingItemsReorder, Object>(
+             new HassShoppingItemsReorder(ids), cancellationToken);
 
     #endregion
 
@@ -1502,6 +1080,70 @@ public static class IHomeAssistantConnectionExtensions
 
         => connection.SendCommandAndReturnResponseAsync<HassTimerDelete, Object>(
             new HassTimerDelete(id), cancellationToken);
+
+    #endregion
+
+    #region User
+
+    /// <summary>
+    /// Gets a list of users
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="connection"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<IReadOnlyCollection<HassUser>?> GetUsersAsync(this IHomeAssistantConnection connection,
+        CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassUserList, IReadOnlyCollection<HassUser>>(
+            new HassUserList(), cancellationToken);
+
+    /// <summary>
+    /// Creates a new user
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="name"></param>
+    /// <param name="groups"></param>
+    /// <param name="localOnly"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassUser?> CreateUserAsync(this IHomeAssistantConnection connection,
+       string name, IEnumerable<string> groups, bool localOnly,
+       CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassUserCreate, HassUser>(
+            new HassUserCreate(name, groups, localOnly), cancellationToken);
+
+    /// <summary>
+    /// Updates the specified user
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="isActive"></param>
+    /// <param name="groups"></param>
+    /// <param name="localOnly"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public static Task<HassUser?> UpdateUserAsync(this IHomeAssistantConnection connection, string id,
+       string? name = default, bool? isActive = default, IEnumerable<string>? groups = default,
+       bool? localOnly = default, CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassUserUpdate, HassUser>(
+             new HassUserUpdate(id, name, isActive, groups, localOnly), cancellationToken);
+
+    /// <summary>
+    /// Deletes the specified lovelace user
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="cancellationToken"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static Task DeleteUserAsync(this IHomeAssistantConnection connection, string id,
+        CancellationToken cancellationToken = default)
+
+        => connection.SendCommandAndReturnResponseAsync<HassUserDelete, Object>(
+            new HassUserDelete(id), cancellationToken);
 
     #endregion
 

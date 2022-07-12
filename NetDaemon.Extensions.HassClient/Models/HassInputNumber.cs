@@ -1,8 +1,4 @@
-﻿using NetDaemon.Client.HomeAssistant.Model;
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-
-namespace NetDaemon.Extensions.HassClient.Models;
+﻿namespace NetDaemon.Extensions.HassClient.Models;
 
 public record HassInputNumber
 {
@@ -33,10 +29,3 @@ public record HassInputNumber
 
 }
 
-public enum HassInputNumberMode
-{
-    [EnumMember(Value = "box")]
-    Box,
-    [EnumMember(Value = "slider")]
-    Slider
-}

@@ -1,6 +1,4 @@
-﻿
-using NetDaemon.Extensions.HassClient.Internal.Json;
-using System.Text.Json.Serialization;
+﻿using NetDaemon.Extensions.HassClient.Internal.Json;
 
 namespace NetDaemon.Extensions.HassClient.Models;
 

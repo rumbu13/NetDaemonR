@@ -59,7 +59,8 @@ internal record HassInputDateTimeDelete : HassCommand
 
 internal record HassInputDateTimeUpdate : HassCommand
 {
-    public HassInputDateTimeUpdate(string id, string? name, bool? hasDate, bool? hasTime, string? icon, DateTime? initialValue) :
+    public HassInputDateTimeUpdate(string id, string? name, bool? hasDate, bool? hasTime, string? icon, 
+        DateTime? initialValue) :
         base("input_datetime/update")
     {
         this.InputDateTimeId = id;

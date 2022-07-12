@@ -56,7 +56,8 @@ internal record HassInputSelectDelete : HassCommand
 
 internal record HassInputSelectUpdate : HassCommand
 {
-    public HassInputSelectUpdate(string id, string? name, IEnumerable<string> options, string? initialValue, string? icon) :
+    public HassInputSelectUpdate(string id, string? name, IEnumerable<string> options, string? initialValue, 
+        string? icon) :
         base("input_select/update")
     {
         this.InputSelectId = id;
