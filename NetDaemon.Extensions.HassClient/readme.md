@@ -17,6 +17,7 @@ Supported registries:
 - Input numbers
 - Input selects
 - Persons
+- Shopping list
 - Tags
 - Timers
 - Users
