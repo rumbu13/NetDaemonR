@@ -1,4 +1,5 @@
 ﻿using MQTTnet;
+using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using NetDaemon.Extensions.MqttEntityManager;
 using System;
@@ -154,8 +155,9 @@ public class BleDeviceHandler
 
         LoadGatherData();
 
-        mqttClient.UseApplicationMessageReceivedHandler(OnMqttMessage);
-        mqttClient.SubscribeAsync(new MqttTopicFilterBuilder().WithTopic("espresense/devices/smarttag:20/+").Build());
+        mqttClient.ApplicationMessageReceivedAsync += OnMqttMessage;
+
+        mqttClient.SubscribeAsync("espresense/devices/smarttag:20/+");
 
         gatherToggle.StateChanges()
             .Where(s => s.New.IsOn())
@@ -163,6 +165,11 @@ public class BleDeviceHandler
 
 
 
+    }
+
+    private Task MqttClient_ApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs arg)
+    {
+        throw new NotImplementedException();
     }
 
     private async void SignalAttributesChanged(object? sender, EventArgs e)

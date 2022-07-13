@@ -4,6 +4,7 @@ namespace NetDaemon.Extensions.HassClient.Models;
 
 public record HassDevice
 {
+    [JsonConverter(typeof(JsonAlwaysStringConverter))]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
@@ -12,11 +13,11 @@ public record HassDevice
 
     [JsonConverter(typeof(JsonDeviceConnectionsConverter))]
     [JsonPropertyName("connections")]
-    public HassDeviceConnection[]? Connections { get; init; }
+    public IEnumerable<HassDeviceConnection>? Connections { get; init; }
 
     [JsonConverter(typeof(JsonDeviceIdentifiersConverter))]
     [JsonPropertyName("identifiers")]
-    public HassDeviceIdentifier[]? Identifiers { get; init; }
+    public IEnumerable<HassDeviceIdentifier>? Identifiers { get; init; }
 
     [JsonPropertyName("manufacturer")]
     public string? Manufacturer { get; init; }
@@ -27,12 +28,15 @@ public record HassDevice
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
+    [JsonConverter(typeof(JsonAlwaysStringConverter))]
     [JsonPropertyName("sw_version")]
     public string? SoftwareVersion { get; init; }
 
+    [JsonConverter(typeof(JsonAlwaysStringConverter))]
     [JsonPropertyName("hw_version")]
     public string? HardwareVersion { get; init; }
 
+    [JsonConverter(typeof(JsonAlwaysStringConverter))]
     [JsonPropertyName("via_device_id")]
     public string? ViaDeviceId { get; init; }
 

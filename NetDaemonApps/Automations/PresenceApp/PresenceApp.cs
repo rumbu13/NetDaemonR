@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MQTTnet;
-using MQTTnet.Client.Options;
+using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using NetDaemon.Extensions.MqttEntityManager;
 using System;
@@ -15,7 +15,7 @@ namespace NetDaemonApps.Automations.PresenceApp;
 [NetDaemonApp]
 public class PresenceApp : IAsyncInitializable, IAsyncDisposable
 {
-    IMqttFactory mqttFactory;
+    MqttFactory mqttFactory;
     IManagedMqttClient? mqttClient;
     IMqttEntityManager mqttEntityManager;
     IScheduler scheduler;
@@ -29,7 +29,7 @@ public class PresenceApp : IAsyncInitializable, IAsyncDisposable
 
 
     public PresenceApp(IHaContext haContext, IOptions<MqttConfiguration> options, IMqttEntityManager mqttEntityManager,
-        IMqttFactory mqttFactory, IScheduler scheduler, ILogger<PresenceApp> logger)
+        MqttFactory mqttFactory, IScheduler scheduler, ILogger<PresenceApp> logger)
     {
         this.haContext = haContext;
         this.mqttFactory = mqttFactory;

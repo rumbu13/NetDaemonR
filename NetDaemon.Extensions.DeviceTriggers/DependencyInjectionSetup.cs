@@ -7,6 +7,6 @@ public static class DependencyInjectionSetup
 {
     public static IHostBuilder UseDeviceTriggers(this IHostBuilder builder)
         => builder.ConfigureServices((services) 
-            => services.AddScoped<IDeviceTriggers, Internal.DeviceTriggers>());
+            => services.AddSingleton<IDeviceTriggers, Internal.DeviceTriggers>());
     
 }

@@ -11,7 +11,7 @@ namespace NetDaemon.Extensions.HassClient.Internal.Commands;
 internal record HassAreaList : HassCommand
 {
     public HassAreaList() : 
-        base("config/area_registry")
+        base("config/area_registry/list")
     {            
     }
 }

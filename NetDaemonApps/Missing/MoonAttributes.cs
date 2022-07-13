@@ -1,6 +1,6 @@
 ﻿namespace NetDaemonApps;
 
-public record MoonAttributes
+public record AMoonAttributes
 {
 	[JsonPropertyName("device_class")]
 	public string? DeviceClass { get; init; }

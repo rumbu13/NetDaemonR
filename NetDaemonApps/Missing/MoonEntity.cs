@@ -1,12 +1,12 @@
 ﻿namespace NetDaemonApps;
 
-public record MoonEntity : Entity<MoonEntity, EntityState<MoonAttributes>, MoonAttributes>
+public record AMoonEntity : Entity<AMoonEntity, EntityState<AMoonAttributes>, AMoonAttributes>
 {
-	public MoonEntity(IHaContext haContext, string entityId) : base(haContext, entityId)
+	public AMoonEntity(IHaContext haContext, string entityId) : base(haContext, entityId)
 	{
 	}
 
-	public MoonEntity(Entity entity) : base(entity)
+	public AMoonEntity(Entity entity) : base(entity)
 	{
 	}
 }

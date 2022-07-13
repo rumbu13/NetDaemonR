@@ -31,6 +31,8 @@ namespace NetDaemonApps
 
 		InputButtonEntities InputButton { get; }
 
+		InputDatetimeEntities InputDatetime { get; }
+
 		InputNumberEntities InputNumber { get; }
 
 		InputSelectEntities InputSelect { get; }
@@ -56,6 +58,8 @@ namespace NetDaemonApps
 		SunEntities Sun { get; }
 
 		SwitchEntities Switch { get; }
+
+		TimerEntities Timer { get; }
 
 		UpdateEntities Update { get; }
 
@@ -85,6 +89,7 @@ namespace NetDaemonApps
 		public DeviceTrackerEntities DeviceTracker => new(_haContext);
 		public InputBooleanEntities InputBoolean => new(_haContext);
 		public InputButtonEntities InputButton => new(_haContext);
+		public InputDatetimeEntities InputDatetime => new(_haContext);
 		public InputNumberEntities InputNumber => new(_haContext);
 		public InputSelectEntities InputSelect => new(_haContext);
 		public InputTextEntities InputText => new(_haContext);
@@ -98,6 +103,7 @@ namespace NetDaemonApps
 		public SensorEntities Sensor => new(_haContext);
 		public SunEntities Sun => new(_haContext);
 		public SwitchEntities Switch => new(_haContext);
+		public TimerEntities Timer => new(_haContext);
 		public UpdateEntities Update => new(_haContext);
 		public VacuumEntities Vacuum => new(_haContext);
 		public WeatherEntities Weather => new(_haContext);
@@ -1062,8 +1068,6 @@ namespace NetDaemonApps
 		public InputBooleanEntity ChildRoomAcAutomation => new(_haContext, "input_boolean.child_room_ac_automation");
 		///<summary>Child Room RGB Automation</summary>
 		public InputBooleanEntity ChildRoomRgbAutomation => new(_haContext, "input_boolean.child_room_rgb_automation");
-		///<summary>dev_netdaemon_net_daemon_apps_automations_device_triggers_app_device_triggers_app</summary>
-		public InputBooleanEntity DevNetdaemonNetDaemonAppsAutomationsDeviceTriggersAppDeviceTriggersApp => new(_haContext, "input_boolean.dev_netdaemon_net_daemon_apps_automations_device_triggers_app_device_triggers_app");
 		///<summary>Guest Mode</summary>
 		public InputBooleanEntity GuestMode => new(_haContext, "input_boolean.guest_mode");
 		///<summary>Kitchen Light Automation</summary>
@@ -1132,6 +1136,18 @@ namespace NetDaemonApps
 		public InputButtonEntity OfficeCoverReset => new(_haContext, "input_button.office_cover_reset");
 		///<summary>Office Cover Stop</summary>
 		public InputButtonEntity OfficeCoverStop => new(_haContext, "input_button.office_cover_stop");
+	}
+
+	public partial class InputDatetimeEntities
+	{
+		private readonly IHaContext _haContext;
+		public InputDatetimeEntities(IHaContext haContext)
+		{
+			_haContext = haContext;
+		}
+
+		///<summary>Test DateTime</summary>
+		public InputDatetimeEntity TestDatetime => new(_haContext, "input_datetime.test_datetime");
 	}
 
 	public partial class InputNumberEntities
@@ -1396,11 +1412,11 @@ namespace NetDaemonApps
 		public MediaPlayerEntity EmbyLgWebosTvSk8500pl => new(_haContext, "media_player.emby_lg_webos_tv_sk8500pl");
 		///<summary>Emby Living Room TV</summary>
 		public MediaPlayerEntity EmbyLivingRoomTv => new(_haContext, "media_player.emby_living_room_tv");
-		///<summary>Emby Network Device</summary>
+		///<summary>Emby [TV][LG]55LA740S-ZB</summary>
 		public MediaPlayerEntity EmbyNetworkDevice => new(_haContext, "media_player.emby_network_device");
 		///<summary>Emby Network Device</summary>
 		public MediaPlayerEntity EmbyNetworkDevice2 => new(_haContext, "media_player.emby_network_device_2");
-		///<summary>Emby Network Device</summary>
+		///<summary>Emby [LG] webOS TV UJ620V</summary>
 		public MediaPlayerEntity EmbyNetworkDevice3 => new(_haContext, "media_player.emby_network_device_3");
 		///<summary>Emby BD-S681</summary>
 		public MediaPlayerEntity EmbyNetworkDevice4 => new(_haContext, "media_player.emby_network_device_4");
@@ -1410,7 +1426,7 @@ namespace NetDaemonApps
 		public MediaPlayerEntity EmbyRazvanPhone => new(_haContext, "media_player.emby_razvan_phone");
 		///<summary>Emby Relu TV</summary>
 		public MediaPlayerEntity EmbyReluTv => new(_haContext, "media_player.emby_relu_tv");
-		///<summary>Emby RX-V485 3F5C22</summary>
+		///<summary>Emby Network Device</summary>
 		public MediaPlayerEntity EmbyRxV4853f5c22 => new(_haContext, "media_player.emby_rx_v485_3f5c22");
 		///<summary>Living Room Google Mini</summary>
 		public MediaPlayerEntity LivingRoom => new(_haContext, "media_player.living_room");
@@ -2824,6 +2840,14 @@ namespace NetDaemonApps
 		public SensorEntity ShedOutletUpdateState => new(_haContext, "sensor.shed_outlet_update_state");
 		///<summary>Shower Water Leak Sensor Power Outage Count</summary>
 		public SensorEntity ShowerWaterLeakSensorPowerOutageCount => new(_haContext, "sensor.shower_water_leak_sensor_power_outage_count");
+		///<summary>Smart Tag Beacon 1</summary>
+		public SensorEntity SmartTagBeacon1 => new(_haContext, "sensor.smart_tag_beacon_1");
+		///<summary>Smart Tag Beacon 2</summary>
+		public SensorEntity SmartTagBeacon2 => new(_haContext, "sensor.smart_tag_beacon_2");
+		///<summary>Smart Tag Beacon 3</summary>
+		public SensorEntity SmartTagBeacon3 => new(_haContext, "sensor.smart_tag_beacon_3");
+		///<summary>Smart Tag Beacon 4</summary>
+		public SensorEntity SmartTagBeacon4 => new(_haContext, "sensor.smart_tag_beacon_4");
 		///<summary>Stairs Vibration Sensor Action</summary>
 		public SensorEntity StairsVibrationSensorAction => new(_haContext, "sensor.stairs_vibration_sensor_action");
 		///<summary>Stairs Vibration Sensor Sensitivity</summary>
@@ -3378,6 +3402,18 @@ namespace NetDaemonApps
 		public SwitchEntity ZmeuraManualWatering => new(_haContext, "switch.zmeura_manual_watering");
 	}
 
+	public partial class TimerEntities
+	{
+		private readonly IHaContext _haContext;
+		public TimerEntities(IHaContext haContext)
+		{
+			_haContext = haContext;
+		}
+
+		///<summary>Test</summary>
+		public TimerEntity Test => new(_haContext, "timer.test");
+	}
+
 	public partial class UpdateEntities
 	{
 		private readonly IHaContext _haContext;
@@ -3505,7 +3541,7 @@ namespace NetDaemonApps
 	public record BinarySensorAttributes
 	{
 		[JsonPropertyName("action")]
-		public string? Action { get; init; }
+		public object? Action { get; init; }
 
 		[JsonPropertyName("adverts")]
 		public double? Adverts { get; init; }
@@ -3654,9 +3690,6 @@ namespace NetDaemonApps
 		[JsonPropertyName("reliability")]
 		public string? Reliability { get; init; }
 
-		[JsonPropertyName("reported")]
-		public double? Reported { get; init; }
-
 		[JsonPropertyName("reportHighWater")]
 		public double? ReportHighWater { get; init; }
 
@@ -3701,9 +3734,6 @@ namespace NetDaemonApps
 
 		[JsonPropertyName("tamper")]
 		public bool? Tamper { get; init; }
-
-		[JsonPropertyName("teleFails")]
-		public double? TeleFails { get; init; }
 
 		[JsonPropertyName("temperature")]
 		public double? Temperature { get; init; }
@@ -4048,6 +4078,44 @@ namespace NetDaemonApps
 		public string? Icon { get; init; }
 	}
 
+	public partial record InputDatetimeEntity : Entity<InputDatetimeEntity, EntityState<InputDatetimeAttributes>, InputDatetimeAttributes>
+	{
+		public InputDatetimeEntity(IHaContext haContext, string entityId) : base(haContext, entityId)
+		{
+		}
+
+		public InputDatetimeEntity(Entity entity) : base(entity)
+		{
+		}
+	}
+
+	public record InputDatetimeAttributes
+	{
+		[JsonPropertyName("day")]
+		public double? Day { get; init; }
+
+		[JsonPropertyName("editable")]
+		public bool? Editable { get; init; }
+
+		[JsonPropertyName("friendly_name")]
+		public string? FriendlyName { get; init; }
+
+		[JsonPropertyName("has_date")]
+		public bool? HasDate { get; init; }
+
+		[JsonPropertyName("has_time")]
+		public bool? HasTime { get; init; }
+
+		[JsonPropertyName("month")]
+		public double? Month { get; init; }
+
+		[JsonPropertyName("timestamp")]
+		public double? Timestamp { get; init; }
+
+		[JsonPropertyName("year")]
+		public double? Year { get; init; }
+	}
+
 	public partial record InputNumberEntity : NumericEntity<InputNumberEntity, NumericEntityState<InputNumberAttributes>, InputNumberAttributes>
 	{
 		public InputNumberEntity(IHaContext haContext, string entityId) : base(haContext, entityId)
@@ -4192,9 +4260,6 @@ namespace NetDaemonApps
 		[JsonPropertyName("device_class")]
 		public string? DeviceClass { get; init; }
 
-		[JsonPropertyName("entity_picture")]
-		public string? EntityPicture { get; init; }
-
 		[JsonPropertyName("friendly_name")]
 		public string? FriendlyName { get; init; }
 
@@ -4203,27 +4268,6 @@ namespace NetDaemonApps
 
 		[JsonPropertyName("icon")]
 		public string? Icon { get; init; }
-
-		[JsonPropertyName("media_content_id")]
-		public string? MediaContentId { get; init; }
-
-		[JsonPropertyName("media_content_type")]
-		public string? MediaContentType { get; init; }
-
-		[JsonPropertyName("media_duration")]
-		public double? MediaDuration { get; init; }
-
-		[JsonPropertyName("media_episode")]
-		public double? MediaEpisode { get; init; }
-
-		[JsonPropertyName("media_season")]
-		public double? MediaSeason { get; init; }
-
-		[JsonPropertyName("media_series_title")]
-		public string? MediaSeriesTitle { get; init; }
-
-		[JsonPropertyName("media_title")]
-		public string? MediaTitle { get; init; }
 
 		[JsonPropertyName("restored")]
 		public bool? Restored { get; init; }
@@ -4532,7 +4576,7 @@ namespace NetDaemonApps
 	public record NumericSensorAttributes
 	{
 		[JsonPropertyName("action")]
-		public string? Action { get; init; }
+		public object? Action { get; init; }
 
 		[JsonPropertyName("alarm")]
 		public object? Alarm { get; init; }
@@ -4554,9 +4598,6 @@ namespace NetDaemonApps
 
 		[JsonPropertyName("angle_z")]
 		public double? AngleZ { get; init; }
-
-		[JsonPropertyName("assumed_state")]
-		public bool? AssumedState { get; init; }
 
 		[JsonPropertyName("attribution")]
 		public string? Attribution { get; init; }
@@ -4804,7 +4845,7 @@ namespace NetDaemonApps
 	public record SensorAttributes
 	{
 		[JsonPropertyName("action")]
-		public string? Action { get; init; }
+		public object? Action { get; init; }
 
 		[JsonPropertyName("administrative_area")]
 		public string? AdministrativeArea { get; init; }
@@ -4891,7 +4932,7 @@ namespace NetDaemonApps
 		public double? DeviceTemperature { get; init; }
 
 		[JsonPropertyName("distance")]
-		public object? Distance { get; init; }
+		public double? Distance { get; init; }
 
 		[JsonPropertyName("dns")]
 		public string? Dns { get; init; }
@@ -5014,7 +5055,7 @@ namespace NetDaemonApps
 		public string? Multicast { get; init; }
 
 		[JsonPropertyName("nearest")]
-		public object? Nearest { get; init; }
+		public string? Nearest { get; init; }
 
 		[JsonPropertyName("next_date")]
 		public string? NextDate { get; init; }
@@ -5027,9 +5068,6 @@ namespace NetDaemonApps
 
 		[JsonPropertyName("os")]
 		public string? Os { get; init; }
-
-		[JsonPropertyName("Package")]
-		public string? Package { get; init; }
 
 		[JsonPropertyName("postal_code")]
 		public string? PostalCode { get; init; }
@@ -5077,10 +5115,10 @@ namespace NetDaemonApps
 		public bool? RestoreReports { get; init; }
 
 		[JsonPropertyName("rssi_bedroom")]
-		public object? RssiBedroom { get; init; }
+		public double? RssiBedroom { get; init; }
 
 		[JsonPropertyName("rssi_child_room")]
-		public object? RssiChildRoom { get; init; }
+		public double? RssiChildRoom { get; init; }
 
 		[JsonPropertyName("rssi_kitchen")]
 		public object? RssiKitchen { get; init; }
@@ -5189,9 +5227,6 @@ namespace NetDaemonApps
 
 		[JsonPropertyName("turbo_wash")]
 		public string? TurboWash { get; init; }
-
-		[JsonPropertyName("unknown")]
-		public double? Unknown { get; init; }
 
 		[JsonPropertyName("update")]
 		public object? Update { get; init; }
@@ -5353,6 +5388,9 @@ namespace NetDaemonApps
 		[JsonPropertyName("reliability")]
 		public string? Reliability { get; init; }
 
+		[JsonPropertyName("restored")]
+		public bool? Restored { get; init; }
+
 		[JsonPropertyName("restore_reports")]
 		public bool? RestoreReports { get; init; }
 
@@ -5377,6 +5415,9 @@ namespace NetDaemonApps
 		[JsonPropertyName("supervision_reports")]
 		public bool? SupervisionReports { get; init; }
 
+		[JsonPropertyName("supported_features")]
+		public double? SupportedFeatures { get; init; }
+
 		[JsonPropertyName("temperature")]
 		public double? Temperature { get; init; }
 
@@ -5394,6 +5435,29 @@ namespace NetDaemonApps
 
 		[JsonPropertyName("zone_id")]
 		public double? ZoneId { get; init; }
+	}
+
+	public partial record TimerEntity : Entity<TimerEntity, EntityState<TimerAttributes>, TimerAttributes>
+	{
+		public TimerEntity(IHaContext haContext, string entityId) : base(haContext, entityId)
+		{
+		}
+
+		public TimerEntity(Entity entity) : base(entity)
+		{
+		}
+	}
+
+	public record TimerAttributes
+	{
+		[JsonPropertyName("duration")]
+		public string? Duration { get; init; }
+
+		[JsonPropertyName("editable")]
+		public bool? Editable { get; init; }
+
+		[JsonPropertyName("friendly_name")]
+		public string? FriendlyName { get; init; }
 	}
 
 	public partial record UpdateEntity : Entity<UpdateEntity, EntityState<UpdateAttributes>, UpdateAttributes>
@@ -11718,6 +11782,43 @@ namespace NetDaemonApps
 		}
 	}
 
+	public static class InputDatetimeEntityExtensionMethods
+	{
+		///<summary>This can be used to dynamically set the date and/or time.</summary>
+		public static void SetDatetime(this InputDatetimeEntity target, InputDatetimeSetDatetimeParameters data)
+		{
+			target.CallService("set_datetime", data);
+		}
+
+		///<summary>This can be used to dynamically set the date and/or time.</summary>
+		public static void SetDatetime(this IEnumerable<InputDatetimeEntity> target, InputDatetimeSetDatetimeParameters data)
+		{
+			target.CallService("set_datetime", data);
+		}
+
+		///<summary>This can be used to dynamically set the date and/or time.</summary>
+		///<param name="target">The InputDatetimeEntity to call this service for</param>
+		///<param name="date">The target date the entity should be set to. eg: "2019-04-20"</param>
+		///<param name="time">The target time the entity should be set to. eg: "05:04:20"</param>
+		///<param name="datetime">The target date & time the entity should be set to. eg: "2019-04-20 05:04:20"</param>
+		///<param name="timestamp">The target date & time the entity should be set to as expressed by a UNIX timestamp.</param>
+		public static void SetDatetime(this InputDatetimeEntity target, string? @date = null, DateTime? @time = null, string? @datetime = null, long? @timestamp = null)
+		{
+			target.CallService("set_datetime", new InputDatetimeSetDatetimeParameters{Date = @date, Time = @time, Datetime = @datetime, Timestamp = @timestamp});
+		}
+
+		///<summary>This can be used to dynamically set the date and/or time.</summary>
+		///<param name="target">The IEnumerable<InputDatetimeEntity> to call this service for</param>
+		///<param name="date">The target date the entity should be set to. eg: "2019-04-20"</param>
+		///<param name="time">The target time the entity should be set to. eg: "05:04:20"</param>
+		///<param name="datetime">The target date & time the entity should be set to. eg: "2019-04-20 05:04:20"</param>
+		///<param name="timestamp">The target date & time the entity should be set to as expressed by a UNIX timestamp.</param>
+		public static void SetDatetime(this IEnumerable<InputDatetimeEntity> target, string? @date = null, DateTime? @time = null, string? @datetime = null, long? @timestamp = null)
+		{
+			target.CallService("set_datetime", new InputDatetimeSetDatetimeParameters{Date = @date, Time = @time, Datetime = @datetime, Timestamp = @timestamp});
+		}
+	}
+
 	public static class InputNumberEntityExtensionMethods
 	{
 		///<summary>Decrement the value of an input number entity by its stepping.</summary>
@@ -12815,6 +12916,73 @@ namespace NetDaemonApps
 		public static void TurnOn(this IEnumerable<SwitchEntity> target)
 		{
 			target.CallService("turn_on");
+		}
+	}
+
+	public static class TimerEntityExtensionMethods
+	{
+		///<summary>Cancel a timer.</summary>
+		public static void Cancel(this TimerEntity target)
+		{
+			target.CallService("cancel");
+		}
+
+		///<summary>Cancel a timer.</summary>
+		public static void Cancel(this IEnumerable<TimerEntity> target)
+		{
+			target.CallService("cancel");
+		}
+
+		///<summary>Finish a timer.</summary>
+		public static void Finish(this TimerEntity target)
+		{
+			target.CallService("finish");
+		}
+
+		///<summary>Finish a timer.</summary>
+		public static void Finish(this IEnumerable<TimerEntity> target)
+		{
+			target.CallService("finish");
+		}
+
+		///<summary>Pause a timer.</summary>
+		public static void Pause(this TimerEntity target)
+		{
+			target.CallService("pause");
+		}
+
+		///<summary>Pause a timer.</summary>
+		public static void Pause(this IEnumerable<TimerEntity> target)
+		{
+			target.CallService("pause");
+		}
+
+		///<summary>Start a timer</summary>
+		public static void Start(this TimerEntity target, TimerStartParameters data)
+		{
+			target.CallService("start", data);
+		}
+
+		///<summary>Start a timer</summary>
+		public static void Start(this IEnumerable<TimerEntity> target, TimerStartParameters data)
+		{
+			target.CallService("start", data);
+		}
+
+		///<summary>Start a timer</summary>
+		///<param name="target">The TimerEntity to call this service for</param>
+		///<param name="duration">Duration the timer requires to finish. [optional] eg: 00:01:00 or 60</param>
+		public static void Start(this TimerEntity target, string? @duration = null)
+		{
+			target.CallService("start", new TimerStartParameters{Duration = @duration});
+		}
+
+		///<summary>Start a timer</summary>
+		///<param name="target">The IEnumerable<TimerEntity> to call this service for</param>
+		///<param name="duration">Duration the timer requires to finish. [optional] eg: 00:01:00 or 60</param>
+		public static void Start(this IEnumerable<TimerEntity> target, string? @duration = null)
+		{
+			target.CallService("start", new TimerStartParameters{Duration = @duration});
 		}
 	}
 

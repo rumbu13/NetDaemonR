@@ -12,10 +12,21 @@ internal class JsonDeviceIdentifierConverter : JsonConverter<HassDeviceIdentifie
         if (reader.TokenType != JsonTokenType.StartArray)
             throw new JsonException();
         reader.Read();
-        string? domain = reader.GetString();
-        reader.Read();
-        string? identifier = reader.GetString();
-        reader.Read();
+        string? domain = null;
+        string? identifier = null;
+
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            domain = reader.GetString();
+            reader.Read();
+        }
+
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            identifier = reader.GetString();
+            reader.Read();
+        }
+
         if (reader.TokenType != JsonTokenType.EndArray)
             throw new JsonException();
         return new HassDeviceIdentifier()

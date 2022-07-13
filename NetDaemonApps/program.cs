@@ -8,7 +8,7 @@ using NetDaemon.Extensions.Tts;
 using NetDaemon.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using NetDaemon.Extensions.MqttEntityManager;
-using NetDaemonApps.Infrastructure.DeviceTriggers;
+using NetDaemon.Extensions.DeviceTriggers;
 
 #pragma warning disable CA1812
 
@@ -20,15 +20,15 @@ try
         .UseNetDaemonRuntime()
         .UseNetDaemonTextToSpeech()
         .UseNetDaemonMqttEntityManagement()
+        .UseDeviceTriggers()
         .ConfigureServices((_, services) =>
          {
              services
               .AddAppsFromAssembly(Assembly.GetExecutingAssembly())
               .AddNetDaemonStateManager()
-              .AddNetDaemonScheduler();   
+              .AddNetDaemonScheduler();
              services
-             .AddSingleton<INotificationService, NotificationService>()
-             .AddSingleton<IHassDeviceTriggers, HassDeviceTriggers>();
+             .AddSingleton<INotificationService, NotificationService>();
          })
         
         .Build()
